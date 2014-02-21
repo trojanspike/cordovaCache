@@ -74,4 +74,4 @@ try {
 ## TODO
 * make delete method for container
 * make clearAll method for cache object
-* tru to get the app id automatically 
+* try to get the app id automatically
