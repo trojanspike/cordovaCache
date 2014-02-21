@@ -1,0 +1,35 @@
+{
+  "name": "cordova_cache",
+  "version": "1.0.5",
+  "description": "Cordova cache is a caching javascript class for cordova app caching using the cordova filesystem api",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trojanspike/cordova_cache.git"
+  },
+  "keywords": [
+    "cordova",
+    "cache",
+    "filesystem",
+    "api",
+    "grunt",
+    "apps"
+  ],
+  "author": "Lee Mc Kay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trojanspike/cordova_cache/issues"
+  },
+  "homepage": "https://github.com/trojanspike/cordova_cache"
+}
