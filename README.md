@@ -1,4 +1,4 @@
-cordova_cache
+cordova cache
 =============
 
 Javascript class for cordova app caching using file system api
@@ -27,19 +27,34 @@ try {
 ```
 
 ### window.SI
-* .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - function & callback with cache object } thrown exceptions
+* .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - function & callback with cache object } throw exceptions
 
 ```js
     SI.cordovaCache('io.hellocordova.cache', function(cache){
         // etc
     });
 ```
+### cache methods
+* .list : 0 params , returns array of container available
+* .container : 1 param { 1 - string } throws exception if not a string
+* example might be :
+```js
+    if( cache.list().indexOf('myContainer') < 0 ){
+        // display to the user maybe to make a name for it?
+        $('#create').on('click' , function(){
+            var Container = cache.container('myContainer');
+            Container.put($('#someInput').val()).save(function(){
+                $('#feedback').html('<h3> Saved </h3>');
+            }); //chained saved
+        });
+    }
+```
 ### container methods
 * .get  : 0 param
 * .put  : 1 param { 1 - string } throws exception if not a string
 * .save : 1 param , options { 1 - function } completes when files is written to and saved , has param of file data in JSON string format
 * .details : 0 params , return array of created container available to use
-Example could be :
+* Example could be :
 ```js
     var UserPoint = cache.container('UserPoint');
     if (UserPoints.get() == ''){
@@ -54,19 +69,4 @@ Example could be :
         $('#flight').text( _data.flight );
         $('#updated').text( _data.updated );
     });
-```
-### cache methods
-* .list : 0 params , returns array of container available
-* .container : 1 param { 1 - string } throws exception if not a string
-example
-```js
-    if( cache.list().indexOf('myContainer') < 0 ){
-        // display to the user maybe to make a name for it?
-        $('#create').on('click' , function(){
-            var Container = cache.container('myContainer');
-            Container.put($('#someInput').val()).save(function(){
-                $('#feedback').html('<h3> Saved </h3>');
-            }); //chained saved
-        });
-    }
 ```
