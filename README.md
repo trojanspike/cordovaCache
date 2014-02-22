@@ -2,7 +2,8 @@ cordova cache
 =============
 
 Javascript class for cordova app caching using file system api.
-Note: It would be bad practice to use this for caching sensitive data like user passwords , user API keys etc.
+
+Note: It would be bad practice to use this for caching sensitive data like user passwords , user API keys etc in it's current state.
 
 ### Usage
 ```js
@@ -81,3 +82,4 @@ try {
 * try to get the app id automatically
 * make test suites
 * attach for other libs : jQuery , requirejs & angular
+* add secure data saving logic for containers
