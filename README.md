@@ -5,7 +5,7 @@ Javascript class for cordova app caching using file system api
 
 ### Usage
 ```js
-// initiate the class which will create a catching file
+// initiate the class which will create your caching file
 try {
     SI.cordovaCache('io.cordova.cordovaCache', function(cache){
         console.log(cache);
@@ -20,6 +20,9 @@ try {
             // all content from the cache file in JSON string format
         });
         myContainer.details(); // object { created & updated } times
+        
+        var myOtherContainer = cache.container('myOtherContainer');
+        var another = cache.container('another');
     });
 } catch(e){
     console.log(e.message);
@@ -75,3 +78,5 @@ try {
 * make delete method for container
 * make clearAll method for cache object
 * try to get the app id automatically
+* make test suites
+* attach for other libs : jQuery , requirejs & angular
