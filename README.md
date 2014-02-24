@@ -5,7 +5,53 @@ Javascript class for cordova app caching using file system api.
 
 Note: It would be bad practice to use this for caching sensitive data like user passwords , user API keys etc in it's current state.
 
-### Usage
+### usage - with cryption
+```js
+var crypt = function(){
+    try{
+        SI.cordovaCache('co.uk.sites-ignite.cache', function(cache, crypt){
+            console.log(cache);
+            console.log(crypt);
+            var DoSuccess = function(){
+                    console.log(cache.list());
+                    var MyCrypt = cache.container('MyCrypt', true); // true means to encrypt the data , defaults to false
+                    MyCrypt.put( JSON.stringify( { secretKey : 'acbef12345' } ) );
+                    MyCrypt.save(function(allC){
+                        console.log('All data from cache');
+                        console.log(allC);
+                    });
+                    MyCrypt.get();  // return the value held within the container
+
+                    // no encryption container
+                    var MyNoCrypt = cache.container('MyNoCrypt');
+                    MyNoCrypt.put('hello World').save(function(allC){
+                        console.log(allC);
+                    });
+                    console.log(MyCrypt.details().crypt);
+                    console.log(MyNoCrypt.details().crypt);
+                    console.log(MyCrypt.details());
+                },
+                DoFailure = function(){
+                    // inform user of wrong password -> try again ?
+                    crypt.init('WrongPassword', DoSuccess, DoFailure);
+                };
+
+            if(crypt.isset()){
+                // crypt has been set with a password , now we need to verify
+                crypt.init('password', DoSuccess, DoFailure);
+            }else{
+                // crypt setup is required, obv you would have a user form & view with PWD vs PWD etc
+                crypt.setPwd('password', DoSuccess);
+            }
+        });
+    }catch(e){
+        console.log(e.message);
+    }
+};
+document.addEventListener('deviceready', crypt, false);
+```
+
+### Usage - no cryption
 ```js
 // initiate the class which will create your caching file
 try {
