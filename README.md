@@ -57,22 +57,21 @@ try {
 ### container methods
 * .get  : 0 param
 * .put  : 1 param { 1 - string } throws exception if not a string
-* .save : 1 param , options { 1 - function } completes when files is written to and saved , has param of file data in JSON string format
+* .save : 1 param , optional { 1 - function } completes when files is written to and saved , has param of file data in JSON string format
 * .details : 0 params , return array of created container available to use
 * Example could be :
 ```js
-    var UserPoint = cache.container('UserPoint');
+    var UserPoints = cache.container('UserPoint');
     if (UserPoints.get() == ''){
         UserPoints.put(JSON.stringify({ strength : 0, speed : 0, flight : 0 }));
         UserPoints.save();
     }
     $('#Load').on('click' , function(){
         var _data = JSON.parse( UserPoints.get() );
-        _data.updated = UserPoints.details().updated;
         $('#strength').text( _data.strength );
         $('#speed').text( _data.speed );
         $('#flight').text( _data.flight );
-        $('#updated').text( _data.updated );
+        $('#updated').text( UserPoint.details().updated );
     });
 ```
 
