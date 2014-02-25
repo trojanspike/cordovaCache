@@ -154,4 +154,4 @@ try {
 * try to get the app id automatically
 * make test suites
 * attach for other libs : jQuery , requirejs & angular
-* ~~ add secure data saving logic for containers ~~
+* ~~add secure data saving logic for containers~~
