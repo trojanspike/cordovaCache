@@ -247,9 +247,6 @@
     }
     CacheObj = {
       rmAll: function(callback) {
-        if (callback == null) {
-          callback = null;
-        }
         if (typeof callback !== null && typeof callback !== 'function') {
           throw new Error('#018 : rmAll param to be function or empty');
         } else {

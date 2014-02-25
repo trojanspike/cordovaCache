@@ -161,7 +161,7 @@ do (window)->
       throw new Error '#007 : JSON not available'
 
     CacheObj =
-      rmAll : (callback=null)->
+      rmAll : (callback)->
         if typeof callback isnt null and typeof callback isnt 'function'
           throw new Error '#018 : rmAll param to be function or empty'
         else
