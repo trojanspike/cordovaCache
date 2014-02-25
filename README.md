@@ -64,7 +64,7 @@ try {
 }
 ```
 
-### window.SI , $
+### window.SI , jQuery
 * .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - callback with cache and crypto:(optional) objects } throws exceptions on errors
 
 ```js
@@ -73,7 +73,7 @@ try {
     });
 ```
 ```js
-    SI.cordovaCache('io.hellocordova.cache', function(cache, crypto){
+    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){
         // etc
     });
 ```
