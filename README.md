@@ -80,6 +80,7 @@ try {
 ### cache methods
 * .list : 0 params , returns array of container available
 * .container : 1 param { 1 - string } throws exception if not a string
+* .rmAll    : 1 param:optional { 1-function , calls when complete }
 * example might be :
 ```js
     if( cache.list().indexOf('myContainer') < 0 ){
@@ -97,6 +98,7 @@ try {
 * .put  : 1 param { 1 - string } throws exception if not a string
 * .save : 1 param , optional { 1 - function } completes when files is written to and saved , has param of file data in JSON string format
 * .details : 0 params , return array of created container available to use
+* .rm    : 0 params , deletes the container from the cache file
 * Example could be :
 ```js
     var UserPoints = cache.container('UserPoint');
@@ -147,8 +149,8 @@ try {
     SensitiveData.details().crypt; // = true, otherwise false
 ```
 ## TODO
-* make delete method for container
-* make clearAll method for cache object
+* ~~make delete method for container~~
+* ~~make clearAll method for cache object~~
 * try to get the app id automatically
 * make test suites
 * attach for other libs : jQuery , requirejs & angular
