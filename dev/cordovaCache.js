@@ -149,6 +149,14 @@
         details: function() {
           return cache[container].details;
         },
+        rm: function() {
+          var _CONT;
+          _CONT = JSON.parse(_content);
+          delete _CONT[container];
+          return _RW.write(JSON.stringify(_CONT), function() {
+            return true;
+          });
+        },
         save: function(cb) {
           var _Stamp;
           _Stamp = new Date().getTime();
@@ -239,6 +247,16 @@
       throw new Error('#007 : JSON not available');
     }
     CacheObj = {
+      rmAll: function(callback) {
+        if (callback == null) {
+          callback = null;
+        }
+        if (typeof callback !== null && typeof callback !== 'function') {
+          throw new Error('#018 : rmAll param to be function or empty');
+        } else {
+          return _RW.write(JSON.stringify({}), callback || function() {});
+        }
+      },
       list: function() {
         var key, _list, _obj;
         if (_content === '') {

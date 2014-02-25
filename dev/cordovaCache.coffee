@@ -101,6 +101,10 @@ do (window)->
             @
         details : ->
           cache[container].details
+        rm : ->
+          _CONT = JSON.parse _content
+          delete _CONT[container]
+          _RW.write JSON.stringify(_CONT), -> return true
         save : (cb)->
           _Stamp = new Date().getTime()
           if typeof cb isnt 'undefined' and typeof cb isnt 'function' then throw new TypeError '#102 : user error, save($1) $1 must be a function or empty'
@@ -158,6 +162,11 @@ do (window)->
       throw new Error '#007 : JSON not available'
 
     CacheObj =
+      rmAll : (callback=null)->
+        if typeof callback isnt null and typeof callback isnt 'function'
+          throw new Error '#018 : rmAll param to be function or empty'
+        else
+          _RW.write  JSON.stringify({}) , callback || ->
       list : ->
         if _content is '' then []
         else
