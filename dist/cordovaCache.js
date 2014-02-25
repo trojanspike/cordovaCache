@@ -1,5 +1,5 @@
 (function(window) {
-  var cordovaCache, crypt, defaultDir, opts, _RW, _content, _crypto, _entry, _getCache, _id, _ready;
+  var cacheTasks, cordovaCache, crypt, defaultDir, opts, _RW, _content, _crypto, _entry, _getCache, _id, _ready;
   opts = {
     create: true,
     exclusive: false
@@ -232,8 +232,7 @@
   })();
 
   /* ----- Attach  ---- */
-  window.SI = window.SI || {};
-  return window.SI.cordovaCache = function(id, callback) {
+  cacheTasks = function(id, callback) {
     var CacheObj;
     if (typeof id !== 'string' || typeof callback !== 'function') {
       throw new Error('#001 : codovaCache params Error , $1 = string $2 = function');
@@ -291,4 +290,13 @@
       });
     }
   };
+
+  /* attach , jQuery , requireJS, angular */
+  if (typeof window.jQuery === 'function') {
+    jQuery.cordovaCache = cacheTasks;
+  } else {
+    window.SI = window.SI || {};
+    window.SI.cordovaCache = cacheTasks;
+  }
+  return null;
 })(window);

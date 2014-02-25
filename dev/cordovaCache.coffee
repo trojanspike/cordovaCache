@@ -152,8 +152,7 @@ do (window)->
 
 
   ### ----- Attach  ---- ###
-  window.SI = window.SI or {}
-  window.SI.cordovaCache = (id, callback) ->
+  cacheTasks  = (id, callback) ->
     if typeof id isnt 'string' or typeof callback isnt 'function'
       throw new Error '#001 : codovaCache params Error , $1 = string $2 = function'
     if _id is null then _id = id
@@ -184,3 +183,12 @@ do (window)->
     else
       _getCache ->
         callback CacheObj, new crypt
+
+  ### attach , jQuery , requireJS, angular ###
+  if typeof window.jQuery is 'function'
+    jQuery.cordovaCache = cacheTasks
+  else
+    window.SI = window.SI or {}
+    window.SI.cordovaCache = cacheTasks
+
+  return null

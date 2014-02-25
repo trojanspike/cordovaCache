@@ -64,7 +64,7 @@ try {
 }
 ```
 
-### window.SI
+### window.SI , $
 * .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - callback with cache and crypto:(optional) objects } throws exceptions on errors
 
 ```js
@@ -153,5 +153,5 @@ try {
 * ~~make clearAll method for cache object~~
 * try to get the app id automatically
 * make test suites
-* attach for other libs : jQuery , requirejs & angular
+* attach for other libs : ~~jQuery~~ , requirejs & angular
 * ~~add secure data saving logic for containers~~
