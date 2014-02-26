@@ -64,7 +64,7 @@ try {
 }
 ```
 
-### window.SI , jQuery
+### window.SI , jQuery, angular , requirejs
 * .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - callback with cache and crypto:(optional) objects } throws exceptions on errors
 
 ```js
@@ -76,7 +76,7 @@ try {
 ```js
     // angular factory
     angular.module('app', ['SI.cordova'])
-    .contraoler('home', function($scope, cordovaCache){// etc });
+    .controller('home', function($scope, cordovaCache){// etc });
 ```
 ```js
     requirejs(['cordovaCache'], function(cordovaCache){// etc });
