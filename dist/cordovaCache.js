@@ -107,20 +107,8 @@
     function cordovaCache(container, cryptParam) {
       var cache, methods, _stamp;
       _stamp = new Date().getTime();
-      if (_content === '') {
-        cache = {};
-        cache[container] = {
-          content: '',
-          details: {
-            created: _stamp,
-            updated: _stamp,
-            crypt: cryptParam
-          }
-        };
-      } else {
-        cache = JSON.parse(_content);
-      }
-      if (typeof cache[container] === 'undefined') {
+      cache = _content === '' ? cache = {} : JSON.parse(_content);
+      if (!cache.hasOwnProperty(container)) {
         cache[container] = {
           content: '',
           details: {
@@ -291,7 +279,18 @@
   /* attach , jQuery , requireJS, angular */
   if (typeof window.jQuery === 'function') {
     jQuery.cordovaCache = cacheTasks;
-  } else {
+  }
+  if (typeof window.angular === 'object') {
+    angular.module('SI.cordova', []).factory('cordovaCache', function() {
+      return cacheTasks;
+    });
+  }
+  if (typeof window.define === 'function' && window.define.amd) {
+    define('cordovaCache', [], function() {
+      return cacheTasks;
+    });
+  }
+  if (typeof window.jQuery !== 'function' && typeof window.angular !== 'object' && typeof window.define !== 'function') {
     window.SI = window.SI || {};
     window.SI.cordovaCache = cacheTasks;
   }

@@ -83,14 +83,16 @@ do (window)->
   class cordovaCache
     constructor:(container, cryptParam)->
       _stamp = new Date().getTime()
-      if _content is ''
-        cache = {}
-        cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
-      else
-        cache = JSON.parse _content
+     # _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
+      cache = if _content is '' then cache = {} else JSON.parse _content
+     # if _content is ''
+      #  cache = {}
+      #  cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
+     # else
+       # cache = JSON.parse _content
 
-      if typeof cache[container] is 'undefined' then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
-
+      # if typeof cache[container] is 'undefined' then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
+      if ! cache.hasOwnProperty(container) then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
       methods =
         get : ->
           if cryptParam then _crypto.decrypt cache[container].content else cache[container].content
@@ -187,7 +189,15 @@ do (window)->
   ### attach , jQuery , requireJS, angular ###
   if typeof window.jQuery is 'function'
     jQuery.cordovaCache = cacheTasks
-  else
+  if typeof window.angular is 'object'
+    angular.module 'SI.cordova', []
+    .factory 'cordovaCache', ->
+        return cacheTasks
+  if typeof window.define is 'function' and window.define.amd
+    define 'cordovaCache', [], ->
+      return cacheTasks
+
+  if typeof window.jQuery isnt 'function' and typeof window.angular isnt 'object' and typeof window.define isnt 'function'
     window.SI = window.SI or {}
     window.SI.cordovaCache = cacheTasks
 
