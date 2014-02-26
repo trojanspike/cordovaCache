@@ -71,12 +71,16 @@ try {
     SI.cordovaCache('io.hellocordova.cache', function(cache){// etc });
 ```
 ```js
-    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){// etc });
+    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){
+        cordovaCache('io.hellocordova.cache', function(cache){// etc });
+    });
 ```
 ```js
     // angular factory
     angular.module('app', ['SI.cordova'])
-    .controller('home', function($scope, cordovaCache){// etc });
+    .controller('home', function($scope, cordovaCache){
+        cordovaCache('io.hellocordova.cache', function(cache){// etc });
+    });
 ```
 ```js
     requirejs(['cordovaCache'], function(cordovaCache){// etc });
