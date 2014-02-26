@@ -107,7 +107,7 @@
     function cordovaCache(container, cryptParam) {
       var cache, methods, _stamp;
       _stamp = new Date().getTime();
-      cache = _content === '' ? cache = {} : JSON.parse(_content);
+      cache = _content === '' ? {} : JSON.parse(_content);
       if (!cache.hasOwnProperty(container)) {
         cache[container] = {
           content: '',

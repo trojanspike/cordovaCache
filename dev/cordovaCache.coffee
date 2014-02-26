@@ -84,7 +84,7 @@ do (window)->
     constructor:(container, cryptParam)->
       _stamp = new Date().getTime()
      # _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
-      cache = if _content is '' then cache = {} else JSON.parse _content
+      cache = if _content is '' then {} else JSON.parse _content
      # if _content is ''
       #  cache = {}
       #  cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
