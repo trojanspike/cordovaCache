@@ -1,5 +1,5 @@
 (function(window) {
-  var cordovaCache, crypt, defaultDir, opts, _RW, _content, _crypto, _entry, _getCache, _id, _ready;
+  var cacheTasks, cordovaCache, crypt, defaultDir, opts, _RW, _content, _crypto, _entry, _getCache, _id, _ready;
   opts = {
     create: true,
     exclusive: false
@@ -107,20 +107,8 @@
     function cordovaCache(container, cryptParam) {
       var cache, methods, _stamp;
       _stamp = new Date().getTime();
-      if (_content === '') {
-        cache = {};
-        cache[container] = {
-          content: '',
-          details: {
-            created: _stamp,
-            updated: _stamp,
-            crypt: cryptParam
-          }
-        };
-      } else {
-        cache = JSON.parse(_content);
-      }
-      if (typeof cache[container] === 'undefined') {
+      cache = _content === '' ? cache = {} : JSON.parse(_content);
+      if (!cache.hasOwnProperty(container)) {
         cache[container] = {
           content: '',
           details: {
@@ -148,6 +136,14 @@
         },
         details: function() {
           return cache[container].details;
+        },
+        rm: function() {
+          var _CONT;
+          _CONT = JSON.parse(_content);
+          delete _CONT[container];
+          return _RW.write(JSON.stringify(_CONT), function() {
+            return true;
+          });
         },
         save: function(cb) {
           var _Stamp;
@@ -224,8 +220,7 @@
   })();
 
   /* ----- Attach  ---- */
-  window.SI = window.SI || {};
-  return window.SI.cordovaCache = function(id, callback) {
+  cacheTasks = function(id, callback) {
     var CacheObj;
     if (typeof id !== 'string' || typeof callback !== 'function') {
       throw new Error('#001 : codovaCache params Error , $1 = string $2 = function');
@@ -239,6 +234,13 @@
       throw new Error('#007 : JSON not available');
     }
     CacheObj = {
+      rmAll: function(callback) {
+        if (typeof callback !== null && typeof callback !== 'function') {
+          throw new Error('#018 : rmAll param to be function or empty');
+        } else {
+          return _RW.write(JSON.stringify({}), callback || function() {});
+        }
+      },
       list: function() {
         var key, _list, _obj;
         if (_content === '') {
@@ -273,4 +275,24 @@
       });
     }
   };
+
+  /* attach , jQuery , requireJS, angular */
+  if (typeof window.jQuery === 'function') {
+    jQuery.cordovaCache = cacheTasks;
+  }
+  if (typeof window.angular === 'object') {
+    angular.module('SI.cordova', []).factory('cordovaCache', function() {
+      return cacheTasks;
+    });
+  }
+  if (typeof window.define === 'function' && window.define.amd) {
+    define('cordovaCache', [], function() {
+      return cacheTasks;
+    });
+  }
+  if (typeof window.jQuery !== 'function' && typeof window.angular !== 'object' && typeof window.define !== 'function') {
+    window.SI = window.SI || {};
+    window.SI.cordovaCache = cacheTasks;
+  }
+  return null;
 })(window);

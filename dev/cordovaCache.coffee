@@ -83,14 +83,16 @@ do (window)->
   class cordovaCache
     constructor:(container, cryptParam)->
       _stamp = new Date().getTime()
-      if _content is ''
-        cache = {}
-        cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
-      else
-        cache = JSON.parse _content
+     # _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
+      cache = if _content is '' then cache = {} else JSON.parse _content
+     # if _content is ''
+      #  cache = {}
+      #  cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
+     # else
+       # cache = JSON.parse _content
 
-      if typeof cache[container] is 'undefined' then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
-
+      # if typeof cache[container] is 'undefined' then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
+      if ! cache.hasOwnProperty(container) then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
       methods =
         get : ->
           if cryptParam then _crypto.decrypt cache[container].content else cache[container].content
@@ -101,6 +103,10 @@ do (window)->
             @
         details : ->
           cache[container].details
+        rm : ->
+          _CONT = JSON.parse _content
+          delete _CONT[container]
+          _RW.write JSON.stringify(_CONT), -> return true
         save : (cb)->
           _Stamp = new Date().getTime()
           if typeof cb isnt 'undefined' and typeof cb isnt 'function' then throw new TypeError '#102 : user error, save($1) $1 must be a function or empty'
@@ -148,8 +154,7 @@ do (window)->
 
 
   ### ----- Attach  ---- ###
-  window.SI = window.SI or {}
-  window.SI.cordovaCache = (id, callback) ->
+  cacheTasks  = (id, callback) ->
     if typeof id isnt 'string' or typeof callback isnt 'function'
       throw new Error '#001 : codovaCache params Error , $1 = string $2 = function'
     if _id is null then _id = id
@@ -158,6 +163,11 @@ do (window)->
       throw new Error '#007 : JSON not available'
 
     CacheObj =
+      rmAll : (callback)->
+        if typeof callback isnt null and typeof callback isnt 'function'
+          throw new Error '#018 : rmAll param to be function or empty'
+        else
+          _RW.write  JSON.stringify({}) , callback || ->
       list : ->
         if _content is '' then []
         else
@@ -175,3 +185,20 @@ do (window)->
     else
       _getCache ->
         callback CacheObj, new crypt
+
+  ### attach , jQuery , requireJS, angular ###
+  if typeof window.jQuery is 'function'
+    jQuery.cordovaCache = cacheTasks
+  if typeof window.angular is 'object'
+    angular.module 'SI.cordova', []
+    .factory 'cordovaCache', ->
+        return cacheTasks
+  if typeof window.define is 'function' and window.define.amd
+    define 'cordovaCache', [], ->
+      return cacheTasks
+
+  if typeof window.jQuery isnt 'function' and typeof window.angular isnt 'object' and typeof window.define isnt 'function'
+    window.SI = window.SI or {}
+    window.SI.cordovaCache = cacheTasks
+
+  return null

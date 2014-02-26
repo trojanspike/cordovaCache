@@ -64,22 +64,27 @@ try {
 }
 ```
 
-### window.SI
+### window.SI , jQuery, angular , requirejs
 * .cordovaCache : 2 params { 1 - string(id of your cordova app) , 2 - callback with cache and crypto:(optional) objects } throws exceptions on errors
 
 ```js
-    SI.cordovaCache('io.hellocordova.cache', function(cache){
-        // etc
-    });
+    SI.cordovaCache('io.hellocordova.cache', function(cache){// etc });
 ```
 ```js
-    SI.cordovaCache('io.hellocordova.cache', function(cache, crypto){
-        // etc
-    });
+    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){// etc });
+```
+```js
+    // angular factory
+    angular.module('app', ['SI.cordova'])
+    .controller('home', function($scope, cordovaCache){// etc });
+```
+```js
+    requirejs(['cordovaCache'], function(cordovaCache){// etc });
 ```
 ### cache methods
 * .list : 0 params , returns array of container available
 * .container : 1 param { 1 - string } throws exception if not a string
+* .rmAll    : 1 param:optional { 1-function , calls when complete }
 * example might be :
 ```js
     if( cache.list().indexOf('myContainer') < 0 ){
@@ -97,6 +102,7 @@ try {
 * .put  : 1 param { 1 - string } throws exception if not a string
 * .save : 1 param , optional { 1 - function } completes when files is written to and saved , has param of file data in JSON string format
 * .details : 0 params , return array of created container available to use
+* .rm    : 0 params , deletes the container from the cache file
 * Example could be :
 ```js
     var UserPoints = cache.container('UserPoint');
@@ -147,9 +153,9 @@ try {
     SensitiveData.details().crypt; // = true, otherwise false
 ```
 ## TODO
-* make delete method for container
-* make clearAll method for cache object
-* try to get the app id automatically
+* ~~make delete method for container~~
+* ~~make clearAll method for cache object~~
+* try to get the app id automatically {Anyone know how to get this?}
 * make test suites
-* attach for other libs : jQuery , requirejs & angular
+* attach for other libs : ~~jQuery~~ , ~~requirejs~~ & ~~angular~~
 * ~~add secure data saving logic for containers~~
