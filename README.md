@@ -71,9 +71,7 @@ try {
     SI.cordovaCache('io.hellocordova.cache', function(cache){// etc });
 ```
 ```js
-    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){
-        cordovaCache('io.hellocordova.cache', function(cache){// etc });
-    });
+    $.cordovaCache('io.hellocordova.cache', function(cache, crypto){// etc});
 ```
 ```js
     // angular factory
@@ -83,7 +81,9 @@ try {
     });
 ```
 ```js
-    requirejs(['cordovaCache'], function(cordovaCache){// etc });
+    requirejs(['cordovaCache'], function(cordovaCache){
+        cordovaCache('io.hellocordova.cache', function(cache, crypto){// etc });
+    });
 ```
 ### cache methods
 * .list : 0 params , returns array of container available
