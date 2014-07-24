@@ -87,7 +87,7 @@ try {
 ```
 ### cache methods
 * .list : 0 params , returns array of container available
-* .container : 2 param { 1 - string, 2 - boolena (optional) } throws exception if $1 is not a string or $2 is given but isnt a boolena
+* .container : 2 param { 1 - string, 2 - boolean (optional) } throws exception if $1 is not a string or $2 is given but isnt a boolean
 * .rmAll    : 1 param:optional { 1-function , calls when complete }
 * example might be :
 ```js
