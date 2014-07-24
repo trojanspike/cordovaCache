@@ -53,11 +53,11 @@ do (window)->
                 entry.file (file)->
                   R = new FileReader()
                   R.onloadend = (evt)->
-                    if evt.target.result is 'null'
+                    if evt.target._result is 'null' or evt.target._result is ''
                       _crypto.content = {}
                       getCache()
                     else
-                      _crypto.content = JSON.parse evt.target.result
+                      _crypto.content = JSON.parse evt.target._result
                       _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
                       getCache()
 
@@ -70,7 +70,7 @@ do (window)->
                   _entry = entry
                   # _crypt.set = true
                   if _content is null then _RW.read (evt)->
-                    _content = evt.target.result
+                    _content = evt.target._result
                     _ready = true
                     callback()
                   ## silent else , should never be gotten to

@@ -66,11 +66,11 @@
             var R;
             R = new FileReader();
             R.onloadend = function(evt) {
-              if (evt.target.result === 'null') {
+              if (evt.target._result === 'null' || evt.target._result === '') {
                 _crypto.content = {};
                 return getCache();
               } else {
-                _crypto.content = JSON.parse(evt.target.result);
+                _crypto.content = JSON.parse(evt.target._result);
                 _crypto.set = typeof _crypto.content[_id] !== 'undefined' ? true : false;
                 return getCache();
               }
@@ -85,7 +85,7 @@
             _entry = entry;
             if (_content === null) {
               return _RW.read(function(evt) {
-                _content = evt.target.result;
+                _content = evt.target._result;
                 _ready = true;
                 return callback();
               });
