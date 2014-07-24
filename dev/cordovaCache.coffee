@@ -106,6 +106,7 @@ do (window)->
         rm : ->
           _CONT = JSON.parse _content
           delete _CONT[container]
+          cache = _CONT
           _RW.write JSON.stringify(_CONT), -> return true
         save : (cb)->
           _Stamp = new Date().getTime()

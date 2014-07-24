@@ -141,6 +141,7 @@
           var _CONT;
           _CONT = JSON.parse(_content);
           delete _CONT[container];
+          cache = _CONT;
           return _RW.write(JSON.stringify(_CONT), function() {
             return true;
           });
