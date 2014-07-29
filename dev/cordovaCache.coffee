@@ -53,7 +53,8 @@ do (window)->
                 entry.file (file)->
                   R = new FileReader()
                   R.onloadend = (evt)->
-                    if evt.target._result is 'null' or evt.target._result is ''
+                    Result = evt.target.result or evt.target._result
+                    if Result is 'null' or Result is ''
                       _crypto.content = {}
                       getCache()
                     else
@@ -70,7 +71,7 @@ do (window)->
                   _entry = entry
                   # _crypt.set = true
                   if _content is null then _RW.read (evt)->
-                    _content = evt.target._result
+                    _content = evt.target.result or evt.target._result
                     _ready = true
                     callback()
                   ## silent else , should never be gotten to

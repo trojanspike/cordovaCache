@@ -66,7 +66,9 @@
             var R;
             R = new FileReader();
             R.onloadend = function(evt) {
-              if (evt.target._result === 'null' || evt.target._result === '') {
+              var Result;
+              Result = evt.target.result || evt.target._result;
+              if (Result === 'null' || Result === '') {
                 _crypto.content = {};
                 return getCache();
               } else {
@@ -85,7 +87,7 @@
             _entry = entry;
             if (_content === null) {
               return _RW.read(function(evt) {
-                _content = evt.target._result;
+                _content = evt.target.result || evt.target._result;
                 _ready = true;
                 return callback();
               });
