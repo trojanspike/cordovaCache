@@ -1,0 +1,33 @@
+{
+  "name": "cordovaCache",
+  "version": "1.0.7",
+  "homepage": "https://github.com/trojanspike/cordovaCache",
+  "authors": [
+    "trojanspike <v3047-github@yahoo.co.uk>"
+  ],
+  "description": "Javascript class for cordova app caching using file system api",
+  "main": [
+	"dist/crypto-aes.js",
+	"dist/cordovaCache.min.js"
+  ],
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "cordova",
+    "cache",
+    "apps",
+    "app",
+    "security",
+    "encryption"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
