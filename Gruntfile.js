@@ -7,12 +7,16 @@ module.exports = function(grunt){
         watch: {
             coffee: {
                 files: ['dev/*.coffee'],
-                tasks: 'coffee:dev',
-                options: {
+                tasks: 'coffee:dev'
+            },
+            devView : {
+				files : 'dev/cordovaCache.js',
+				options: {
 					/* <script src="http://localhost:35729/livereload.js"></script> */
+					/* <script src="http://localhost:9005/dev/cordovaCache.js"></script> */
 					livereload: true
 				},
-            }
+			}
         }
         /* coffee config */
         , coffee: {
