@@ -7,7 +7,11 @@ module.exports = function(grunt){
         watch: {
             coffee: {
                 files: ['dev/*.coffee'],
-                tasks: 'coffee:dev'
+                tasks: 'coffee:dev',
+                options: {
+					/* <script src="http://localhost:35729/livereload.js"></script> */
+					livereload: true
+				},
             }
         }
         /* coffee config */
@@ -54,3 +58,14 @@ module.exports = function(grunt){
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('dist', ['coffee:dist', 'uglify']);
 };
+var fs = require('fs');
+require('http').createServer(function(req, res){
+	if( fs.existsSync(__dirname+req.url) ){
+		res.writeHead(200, {"Content-Type":'application/javascript'});
+		res.end( fs.readFileSync(__dirname+req.url, {encoding:'utf8'}) );	
+	} else {
+		res.writeHead(404, {"Content-Type":'text/plain'});
+		res.end(req.url + ' :: not found');
+	}
+	
+}).listen(9005);
