@@ -1,6 +1,6 @@
 do (window)->
   opts = {create: true, exclusive: false}
-  defaultDir = 'codova_cache'
+  defaultDir = 'cordova_cache'
   ### ---- Static variables ---- ###
   _crypto =
     set : false
