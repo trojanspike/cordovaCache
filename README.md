@@ -3,6 +3,8 @@ cordova cache
 
 Javascript class for cordova app caching using file system api.
 
+$ bower install https://github.com/trojanspike/cordovaCache.git#1.1.0 --save
+
 ### usage - with cryption
 ```js
 try{
