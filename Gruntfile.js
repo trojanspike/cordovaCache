@@ -6,14 +6,14 @@ module.exports = function(grunt){
         /* watch config */
         watch: {
             coffee: {
-                files: ['dev/*.coffee'],
+                files: ['dev/*.coffee','dev/specs/*.coffee'],
                 tasks: 'coffee:dev'
             },
             devView : {
 				files : 'dev/cordovaCache.js',
 				options: {
-					/* <script src="http://localhost:35729/livereload.js"></script> */
-					/* <script src="http://localhost:9005/dev/cordovaCache.js"></script> */
+					/* <script src="http://192.168.1.2:35729/livereload.js"></script> */
+					/* <script src="http://192.168.1.2:9005/dev/cordovaCache.js"></script> */
 					livereload: true
 				},
 			}
@@ -25,14 +25,17 @@ module.exports = function(grunt){
                     bare: true,
                     flatten: true
                 },
-                files: {'dev/cordovaCache.js':['dev/*.coffee']}
+                files: {
+						'dev/cordovaCache.js':['dev/cordovaCache.coffee'],
+						'dev/cordovaCacheSpec.js':['dev/specs/*.coffee']
+						}
             }
             ,dist : {
                 options: {
                     bare: true,
                     flatten: true
                 },
-                files: {'dist/cordovaCache.js':['dev/*.coffee']}
+                files: {'dist/cordovaCache.js':['dev/cordovaCache.coffee']}
             }
         }
 
