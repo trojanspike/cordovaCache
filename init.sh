@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
+# cordova plugin add org.apache.cordova.file
 
 npm install
+
 
