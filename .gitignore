@@ -5,6 +5,7 @@ dev/test.js
 DEV_NOTES.txt
 
 .idea/
+AppTests/
 
 ## Ignore within test dir
 test/engine/
