@@ -58,7 +58,7 @@ do (window)->
                       _crypto.content = {}
                       getCache()
                     else
-                      _crypto.content = JSON.parse evt.target._result
+                      _crypto.content = JSON.parse Result
                       _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
                       getCache()
 
@@ -86,13 +86,7 @@ do (window)->
       _stamp = new Date().getTime()
      # _crypto.set = if typeof _crypto.content[_id] isnt 'undefined' then true else false
       cache = if _content is '' then {} else JSON.parse _content
-     # if _content is ''
-      #  cache = {}
-      #  cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
-     # else
-       # cache = JSON.parse _content
 
-      # if typeof cache[container] is 'undefined' then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
       if ! cache.hasOwnProperty(container) then cache[container] = { content : '', details : { created : _stamp, updated : _stamp, crypt : cryptParam } }
       methods =
         get : ->
@@ -153,7 +147,6 @@ do (window)->
     #      _crypto.write JSON.stringify(_crypto.content), callback
     #  else
     #    throw new Error 'crypt has no password set correctly'
-
 
   ### ----- Attach  ---- ###
   cacheTasks  = (id, callback) ->

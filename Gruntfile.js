@@ -62,7 +62,7 @@ module.exports = function(grunt){
 
 
     // setup hooks
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['watch', 'coffee:dev']);
     grunt.registerTask('dist', ['coffee:dist', 'uglify']);
 };
 var fs = require('fs');
