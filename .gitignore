@@ -2,3 +2,13 @@ node_modules/
 dist/test.js
 dev/crypto-aes.js
 dev/test.js
+DEV_NOTES.txt
+
+.idea/
+
+## Ignore within test dir
+test/engine/
+test/hooks/
+test/platforms/
+test/plugins/
+test/www/components/
