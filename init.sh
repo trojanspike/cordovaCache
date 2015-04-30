@@ -16,7 +16,7 @@ mkdir $BASE/test/{hooks,platforms,plugins} && \
 echo "Setting up the cordova app"
 sleep 2
 
-cd  $BASE/test && cordova plugin add add cordova-plugin-file && \
+cd  $BASE/test && cordova plugin add cordova-plugin-file && \
 git clone https://github.com/trojanspike/CordovaAndroidCrosswalkInstall.git CrossWalk && \
 \
 mv $BASE/test/CrossWalk/CrossWalkInstall.sh $BASE/test/ && rm -Rf $BASE/test/CrossWalk/ && \
