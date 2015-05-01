@@ -6,6 +6,8 @@ Javascript class for cordova app caching using file system api.
 ```bash
 $ bower install cordovaCache --save
 ```
+[Change Log](./CHANGELOG.md)
+[Contributing start up](./CONTRIBUTE.md)
 
 ### usage - with cryption
 ```js
