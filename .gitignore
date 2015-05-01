@@ -1,11 +1,7 @@
 node_modules/
-dist/test.js
-dev/crypto-aes.js
-dev/test.js
 DEV_NOTES.txt
 
 .idea/
-TestApp/
 
 ## Ignore within test dir
 test/engine/
