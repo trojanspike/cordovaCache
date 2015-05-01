@@ -1,6 +1,11 @@
 # http://jasmine.github.io/2.1/introduction.html
 
 describe "Checks something cool", ->
+
+  beforeAll (done)->
+    alert 123456
+    done()
+
   it "checks window is an object", ->
     expect window
     .toBeDefined()
