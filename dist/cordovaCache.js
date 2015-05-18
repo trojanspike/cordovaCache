@@ -72,7 +72,7 @@
                 _crypto.content = {};
                 return getCache();
               } else {
-                _crypto.content = JSON.parse(evt.target._result);
+                _crypto.content = JSON.parse(Result);
                 _crypto.set = typeof _crypto.content[_id] !== 'undefined' ? true : false;
                 return getCache();
               }
